@@ -1,0 +1,39 @@
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+    font-size: 15px;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100%
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+header{
+  box-sizing: border-box;
+  transform-style: inherit;
+}
+
+header, header:before
+{
+  background: 50% 50%;
+}
+
+header::before 
+{
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  transform-origin: center center 0;
+  transform: translateZ(-1px) scale(2);
+  z-index: -1;
+  min-height: 100vh;
+   
+}
