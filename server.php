@@ -229,7 +229,7 @@ if (isset($_GET['delsales'])) {
 	$q = $_POST['quant'];
 	$r = $_POST['rate'];
 	$a = $_POST['amount'];
-	mysqli_query($db, "INSERT INTO INVOICE_13082(CustID, Date, PCode, Quantity, Rate, Amount) VALUES('$c', '$d', '$p', '$q', '$r', '$a')");
+	mysqli_query($db, "INSERT INTO invoice_13082(CustID, Date, PCode, Quantity, Rate, Amount) VALUES('$c', '$d', '$p', '$q', '$r', '$a')");
 	$lastOrder = mysqli_fetch_assoc(mysqli_query($db, "SELECT Max(OrderNum) ORN FROM INVOICE_13082"));
 	echo strip_tags($lastOrder["ORN"]);
 }
@@ -237,7 +237,7 @@ if (isset($_GET['delsales'])) {
 	else if(isset($_GET["do"]) && $_GET["do"] == "delete"){
 		
 	$orderID = $_GET["delID"];
-	mysqli_query($db, "DELETE FROM INVOICE_13082 WHERE OrderNum='$orderID'");
+	mysqli_query($db, "DELETE FROM invoice_13082 WHERE OrderNum='$orderID'");
 	echo "Successfully Deleted Order# ".$_GET["delID"];
 }
 else if(isset($_GET["do"])){
@@ -249,7 +249,7 @@ else if(isset($_GET["do"])){
 	$r = $_POST['rate'];
 	$a = $_POST['amount'];
 	if($_GET["do"] == "update"){
-	mysqli_query($db, "UPDATE INVOICE_13082 SET Date='$d', PCode='$p', Quantity='$q', Rate='$r', Amount='$a' WHERE OrderNum='$o'");
+	mysqli_query($db, "UPDATE invoice_13082 SET Date='$d', PCode='$p', Quantity='$q', Rate='$r', Amount='$a' WHERE OrderNum='$o'");
 	echo "Successfully Updated";
 }
 }
