@@ -76,13 +76,13 @@ document.getElementsByTagName("body")[0].innerHTML += '<table class="cust"><thea
        min.parentElement.removeChild(min); 
        } //Create headings of Invoice Table 
 
-       
+
  document.getElementsByTagName("body")[0].innerHTML += '<table class="invoice"><thead><tr><th>ORDER#</th><th>CUSTOMER ID</th><th>DATE</th><th>PRODUCT CODE</th><th>QUANTITY</th><th>RATE</th><th>AMOUNT</th><th>ACTIONS</th></tr>'; //If Customer already has any invoice add them to table 
- if(invoice.length){ 
+ 
      for(var i=0; i<invoice.length; i++){
           document.getElementsByClassName("invoice")[0].innerHTML += '<tr><td class="order">'+invoice[i].OrderNum+'</td><td class="customID">'+customer.id+'</td><td><input class="date" value='+invoice[i].Date+' type="date"></input></td><td><select class="pclass" onChange="changeRate(this)"></select></td><td><input type="number" min="0" value='+invoice[i].Quantity+' class="quant" onInput="changeAmount(this)"></td><td class="rate">'+products[0].Salesprice+'</td><td class="amount">'+invoice[i].Amount+'</td><td><button onclick="createInvoice(this)">EDIT</button><button class="delBtn" onclick="deleteInvoice(this)">DELETE</button></td></tr>'; 
           } 
-          } //Add the last create invoice row 
+           //Add the last create invoice row 
           console.log(products);
  document.getElementsByClassName("invoice")[0].innerHTML += '<tr><td class="order"></td><td class="customID">'+customer.id+'</td><td><input class="date" type="date"></input></td><td><select class="pclass" onChange="changeRate(this)"></select></td><td><input type="number" min="0" class="quant" onInput="changeAmount(this)"></td><td class="rate">'+products[0].Salesprice+'</td><td class="amount"></td><td class="crtBtn"><button onclick="createInvoice(this)">CREATE</button></td></tr>'; //Add options to product selection of each invoice 
  var prods = document.getElementsByClassName("pclass");
