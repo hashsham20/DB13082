@@ -1,4 +1,3 @@
-<html>
 <?php if (isset($_SESSION['message'])): ?>
 		<div class="msg">
 			<?php 
@@ -7,19 +6,12 @@
 			?>
 		</div>
 	<?php endif ?>
-</html>
-
 <?php 
 
 
-DEFINE ('DB_USER', 'hashsham');
-DEFINE ('DB_PASSWORD', 'khewb69');
-DEFINE ('DB_HOST', 'localhost');
-DEFINE ('DB_NAME', 'project1');
-
 
 	session_start();
-	$db = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	$db = mysqli_connect('localhost', 'hashsham', 'khewb69', 'project1');
 
 
 	if (isset($_POST['savecust'])) {
@@ -227,6 +219,58 @@ if (isset($_GET['delsales'])) {
 	mysqli_query($db, "DELETE FROM SALESPERSON_13082 WHERE id=$id");
 	$_SESSION['message'] = "DELETED!"; 
 	header('location: salesperson.php');
+}
+	
+	if(isset($_GET["do"]) && $_GET["do"] == "create"){
+	$o = $_POST['orderNum'];
+	$c = $_POST['customID'];
+	$d = $_POST['date'];
+	$p = $_POST['pcode'];
+	$q = $_POST['quant'];
+	$r = $_POST['rate'];
+	$a = $_POST['amount'];
+	mysqli_query($db, "INSERT INTO INVOICE_13082(CustID, Date, PCode, Quantity, Rate, Amount) VALUES('$c', '$d', '$p', '$q', '$r', '$a')");
+	$lastOrder = mysqli_fetch_assoc(mysqli_query($db, "SELECT Max(OrderNum) ORN FROM INVOICE_13082"));
+	echo strip_tags($lastOrder["ORN"]);
+}
+
+	else if(isset($_GET["do"]) && $_GET["do"] == "delete"){
+		
+	$orderID = $_GET["delID"];
+	mysqli_query($db, "DELETE FROM INVOICE_13082 WHERE OrderNum='$orderID'");
+	echo "Successfully Deleted Order# ".$_GET["delID"];
+}
+else if(isset($_GET["do"])){
+	$o = $_POST['orderNum'];
+	$c = $_POST['customID'];
+	$d = $_POST['date'];
+	$p = $_POST['pcode'];
+	$q = $_POST['quant'];
+	$r = $_POST['rate'];
+	$a = $_POST['amount'];
+	if($_GET["do"] == "update"){
+	mysqli_query($db, "UPDATE INVOICE_13082 SET Date='$d', PCode='$p', Quantity='$q', Rate='$r', Amount='$a' WHERE OrderNum='$o'");
+	echo "Successfully Updated";
+}
+}
+
+if(isset($_GET["customID"])){
+	$customID = $_GET["customID"];
+	$finalResult = array();
+	$result = mysqli_query($db, "SELECT * FROM CUSTOMERS WHERE id='$customID'");
+	$result = mysqli_fetch_assoc($result);
+	array_push($finalResult, json_encode($result));
+
+	$result = mysqli_query($db, "SELECT * FROM INVOICE_13082 WHERE CustID='$customID'");
+	$result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+	array_push($finalResult, json_encode($result));
+
+	$result = mysqli_query($db, "SELECT * FROM PRODUCTS_13082");
+	$result = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+	array_push($finalResult, json_encode($result));
+
+	echo json_encode($finalResult);
 }
 
 ?>

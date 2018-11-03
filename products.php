@@ -1,10 +1,18 @@
   <?php
-  session_start(); 
+include('server.php');
 
   if (!isset($_SESSION['id'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: test.php');
   }
+
+  			$id = "";
+			$Brand = "";
+			$Type = "";
+			$Shade = "";
+			$Size = "";
+			$Salesprice  = "";
+			$update = "";
   
 ?>
 
@@ -39,6 +47,8 @@ body, html {
                   PRODUCTS</button>
                   <button onclick="location.href='index.php'" type="button">
                   CUSTOMERS</button>
+                  <button onclick="location.href='invoice.php'" type="button">
+                  INVOICE</button>
                   <button onclick="location.href='HomePage.php?logout'" type="del" class="
                   del_btn">LOGOUT</button>
                   </ul>
@@ -52,8 +62,6 @@ body, html {
 </html>
 
 <?php 
-include('server.php');
-include('process.php');
 
 
 
@@ -119,7 +127,7 @@ include('process.php');
 			<th>SHADE</th>
 			<th>SIZE</th>
 			<th>SALES PRICE</th>
-<th>ACTIONS</th>
+			<th>ACTIONS</th>
 
 	
 	<?php while ($row = mysqli_fetch_array($results)) { ?>

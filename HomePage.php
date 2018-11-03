@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <title>HOME PAGE</title>
@@ -14,7 +13,6 @@ body, html {
     height: 100%;
     font-family: "Inconsolata", sans-serif;
 }
-
 </style>
 <body style="background-image: url('image.jpg'); background-size: cover;">
 <header>
@@ -34,6 +32,8 @@ body, html {
                   PRODUCTS</button>
                   <button onclick="location.href='index.php'" type="button">
                   CUSTOMERS</button>
+                  <button onclick="location.href='invoice.php'" type="button">
+                  INVOICE</button>
                   <button onclick="location.href='HomePage.php?logout'" type="del" class="
                   del_btn">LOGOUT</button>
                   </ul>
@@ -56,7 +56,6 @@ body, html {
 
 <?php 
   session_start(); 
-
   if (!isset($_SESSION['id'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: test.php');

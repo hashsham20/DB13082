@@ -1,11 +1,17 @@
   <?php
-  session_start(); 
+include('server.php');
 
   if (!isset($_SESSION['id'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: test.php');
   }
-  
+
+			$id = "";
+			$SName = "";
+			$ContactNum = "";
+			$ListCust = "";
+			$update = "";
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +45,8 @@ body, html {
                   PRODUCTS</button>
                   <button onclick="location.href='index.php'" type="button">
                   CUSTOMERS</button>
+                  <button onclick="location.href='invoice.php'" type="button">
+                  INVOICE</button>
                   <button onclick="location.href='HomePage.php?logout'" type="del" class="
                   del_btn">LOGOUT</button>
                   </ul>
@@ -56,8 +64,6 @@ body, html {
 
 
 <?php 
-include('server.php');
-include('process.php');
 
 
 
@@ -132,11 +138,12 @@ if ($check == '1')
 			<td><?php echo $row['SName']; ?></td>
 			<td><?php echo $row['ContactNum']; ?></td>
 			<td><?php echo $row['ListCust']; ?></td>
-			<td>
+			
 
 											<?php
 if ($check == '1')
-{?>
+{?>				
+				<td>
 				<a href="salesperson.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
 			
 				<a href="salesperson.php?delsales=<?php echo $row['id']; ?>" class="del_btn">Delete</a>

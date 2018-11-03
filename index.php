@@ -1,11 +1,20 @@
   <?php
-  session_start(); 
-
+include('server.php');
   if (!isset($_SESSION['id'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: test.php');
   }
   
+			$id = "";
+			$SHOPNAME = "";
+			$ADDRESS = "";
+			$CONTACT ="";
+			$CONTACTNUM = "";
+			$AREA  = "";
+			$COORDINATES  ="";
+			$CREATED_BY = "";
+			$update = "";
+
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +49,8 @@ body, html {
                   PRODUCTS</button>
                   <button onclick="location.href='index.php'" type="button">
                   CUSTOMERS</button>
+                  <button onclick="location.href='invoice.php'" type="button">
+                  INVOICE</button>
                   <button onclick="location.href='HomePage.php?logout'" type="del" class="
                   del_btn">LOGOUT</button>
                   </ul>
@@ -58,8 +69,7 @@ body, html {
 
 
 <?php 
-include('server.php');
-include('process.php');
+
 
 
 	if (isset($_GET['edit'])) {

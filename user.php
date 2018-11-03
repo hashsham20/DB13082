@@ -1,10 +1,19 @@
   <?php
-  session_start(); 
+include('server.php');
 
   if (!isset($_SESSION['id'])) {
   	$_SESSION['msg'] = "You must log in first";
   	header('location: test.php');
   }
+
+  			$Username = "";
+			$ContactNum = "";
+			$Active ="";
+			$SalespersonID = "";
+			$Admin = "";
+			$Password = "";
+			$id = "";
+			$update = "";
   
 ?>
 
@@ -40,6 +49,8 @@ body, html {
                   PRODUCTS</button>
                   <button onclick="location.href='index.php'" type="button">
                   CUSTOMERS</button>
+                  <button onclick="location.href='invoice.php'" type="button">
+                  INVOICE</button>
                   <button onclick="location.href='HomePage.php?logout'" type="del" class="
                   del_btn">LOGOUT</button>
                   </ul>
@@ -60,8 +71,6 @@ body, html {
 
 
 <?php 
-include('server.php');
-include('process.php');
 
 
 	if (isset($_GET['edit'])) {
@@ -144,11 +153,12 @@ if ($check == '1')
 			<td><?php echo $row['Active']; ?></td>
 			<td><?php echo $row['SalespersonID']; ?></td>
 			<td><?php echo $row['Admin']; ?></td>
-			<td>
+			
 
 											<?php
 if ($check == '1')
 {?>
+				<td>
 				<a href="user.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
 			
 				<a href="user.php?deluser=<?php echo $row['id']; ?>" class="del_btn">Delete</a>
@@ -163,6 +173,8 @@ if ($check == '1')
 <?php
 if ($check == '1')
 {?>
+
+
 
 <form method="post" action="user.php" >
 
@@ -223,17 +235,7 @@ if ($check == '1')
 <?php } ?>
 
 <?php 
-// initialize variables
-	$Username = "";
-	$ContactNum = "";
-	$Active = "";
-	$SalespersonID = "";
-	$Password = "";
-	$Admin = "";
-	$id = 0;
-	$update = false;
 
-	
 
 	$results = mysqli_query($db, "SELECT * FROM USER_13082");
 

@@ -35,7 +35,6 @@ body, html {
 </html>
 
 <?php
-session_start();
 include('server.php');
 
 $id = "";
