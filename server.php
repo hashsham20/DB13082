@@ -229,7 +229,7 @@ if (isset($_GET['delsales'])) {
 	$q = $_POST['quant'];
 	$r = $_POST['rate'];
 	$a = $_POST['amount'];
-	mysqli_query($db, "INSERT INTO invoice_13082(CustID, Date, PCode, Quantity, Rate, Amount) VALUES('$c', '$d', '$p', '$q', '$r', '$a')");
+	mysqli_query($db, "INSERT INTO invoice_13082(CustID, Date, PCode, Quantity, Rate, Amount) VALUES($c, '$d', '$p', '$q', '$r', '$a')");
 	$lastOrder = mysqli_fetch_assoc(mysqli_query($db, "SELECT Max(OrderNum) ORN FROM INVOICE_13082"));
 	echo strip_tags($lastOrder["ORN"]);
 }
