@@ -261,7 +261,7 @@ if(isset($_GET["customID"])){
 	$result = mysqli_fetch_assoc($result);
 	array_push($finalResult, json_encode($result));
 
-	$result = mysqli_query($db, "SELECT * FROM INVOICE_13082 WHERE CustID='$customID'");
+	$result = mysqli_query($db, "SELECT * FROM invoice_13082 WHERE CustID=$customID");
 	$result = mysqli_fetch_all($result,MYSQLI_ASSOC);
 	array_push($finalResult, json_encode($result));
 
