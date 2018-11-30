@@ -34,6 +34,8 @@ body, html {
                   CUSTOMERS</button>
                   <button onclick="location.href='invoice.php'" type="button">
                   INVOICE</button>
+                  <button onclick="location.href='survey.php'" type="button">
+                  SURVEY</button>
                   <button onclick="location.href='HomePage.php?logout'" type="del" class="
                   del_btn">LOGOUT</button>
                   </ul>
@@ -53,7 +55,32 @@ body, html {
 </body>
 </html>
 
+<?php
 
+$db = mysqli_connect("localhost", "hashsham", "khewb69", "project1");
+$q1 = "SELECT COUNT(*) FROM USER_13082";
+$q2 = "SELECT COUNT(*) FROM CUSTOMERS";
+$q3 = "SELECT COUNT(*) FROM PRODUCTS_13082";
+$q4 = "SELECT COUNT(*) FROM SALESPERSON_13082";
+$q5 = "SELECT COUNT(*) FROM invoice_13082";
+
+
+$results1 = mysqli_query($db, $q1);
+$results2 = mysqli_query($db, $q2);
+$results3 = mysqli_query($db, $q3);
+$results4 = mysqli_query($db, $q4);
+$results5 = mysqli_query($db, $q5);
+
+
+$row1 = mysqli_fetch_array($results1);
+$row2 = mysqli_fetch_array($results2);
+$row3 = mysqli_fetch_array($results3);
+$row4 = mysqli_fetch_array($results4);
+$row5 = mysqli_fetch_array($results5);
+
+
+
+?>
 <?php 
   session_start(); 
   if (!isset($_SESSION['id'])) {
@@ -103,7 +130,7 @@ body, html {
     ?>
 
 </div>  
-
+<br>
 <footer id="footer">
   <h4>
     CONTACT US
@@ -115,6 +142,36 @@ body, html {
     <a class="fab fa-google fa-lg" href="#"></a>
   </p>
 </footer>
-		
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>		
 </body>
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+  animationEnabled: true,
+  title:{
+    text: "Dashboard",
+    horizontalAlign: "center"
+  },
+  data: [{
+    type: "doughnut",
+    startAngle: 60,
+    //innerRadius: 60,
+    indexLabelFontSize: 17,
+    indexLabel: "{label} - #percent%",
+    toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+    dataPoints: [
+      { y: <?php echo $row2[0]; ?>, label: "Customers" },
+      { y: <?php echo $row4[0]; ?>, label: "Salespersons" },
+      { y: <?php echo $row3[0]; ?>, label: "Products" },
+      { y: <?php echo $row1[0]; ?>, label: "Users"},
+      { y: <?php echo $row5[0]; ?>, label: "Invoices"}
+    ]
+  }]
+});
+chart.render();
+
+}
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </html>

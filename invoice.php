@@ -37,6 +37,8 @@ input:focus{ border-color: green; }
                   CUSTOMERS</button>
                   <button onclick="location.href='invoice.php'" type="button">
                   INVOICE</button>
+                  <button onclick="location.href='survey.php'" type="button">
+                  SURVEY</button>
                   <button onclick="location.href='HomePage.php?logout'" type="del" class="
                   del_btn">LOGOUT</button>
                   </ul>
